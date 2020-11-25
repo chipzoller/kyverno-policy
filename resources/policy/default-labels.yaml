@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  name: add-default-labels
+  namespace: czns01
+spec:
+  background: false
+  rules:
+  - name: add-default-labels
+    match:
+      resources:
+        kinds:
+        - Pod
+        - Service
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          labels:
+            created-by: "{{request.userInfo.username}}"
