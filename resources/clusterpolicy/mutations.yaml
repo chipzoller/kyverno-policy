@@ -1,8 +1,7 @@
 apiVersion: kyverno.io/v1
-kind: Policy
+kind: ClusterPolicy
 metadata:
   name: add-default-labels
-  namespace: czns01
 spec:
   background: false
   rules:
@@ -10,7 +9,6 @@ spec:
     match:
       resources:
         kinds:
-        - Pod
         - Service
     mutate:
       patchStrategicMerge:
